@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "server": "cd server && npm run swagger-autogen && nodemon server",
+    "client": "cd client && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "create-react-app": "^5.0.1",
+    "nodemon": "^3.1.2"
+  }
+}

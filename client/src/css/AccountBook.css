@@ -1,0 +1,27 @@
+.account-book-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 나눔 */
+    gap: 20px;
+  }
+  
+  .summary-section {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .summary-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+  }
+  
+  .chart-section {
+    grid-column: span 2; /* 차트는 두 열을 모두 차지 */
+  }
+  
+  .detail-section {
+    grid-column: span 2; /* 상세 내역도 두 열을 모두 차지 */
+  }

@@ -1,0 +1,91 @@
+  /* 입력 필드 스타일 개선 */
+  .input-group input {
+    width: 100%;
+    padding: 12px; /* 패딩 증가 */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* 둥근 모서리 증가 */
+    box-sizing: border-box;
+    font-size: 1rem; /* 폰트 크기 조정 */
+  }
+
+
+  .button {
+    background-color: #e91e63; /* 진한 핑크 */
+    color: white;
+    padding: 12px 20px; /* 패딩 증가 */
+    border: none;
+    border-radius: 8px; /* 둥근 모서리 증가 */
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem; /* 폰트 크기 조정 */
+    transition: background-color 0.3s; /* hover 효과 추가 */
+  }
+
+  .button:hover {
+    background-color: #d81b60; /* 더 진한 핑크 */
+  }
+
+    /* 다크 모드에서 로그인 버튼 스타일 */
+    .dark-mode .button {
+        background-color: #BA55D3; /* 연두색 */
+      }
+      
+      .dark-mode .button:hover {
+        background-color: #b43ed1;
+      }
+
+      /* 다크 모드 토글 스위치 스타일 */
+  .dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px; /* 너비 고정 */
+    height: 20px;
+  }
+  
+  .dark-mode-toggle input[type="checkbox"] {
+    display: none;
+  }
+ 
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+
+  .dark-mode-toggle input:checked + .slider {
+    background-color: #f50057; /* 핫핑크 */
+  }
+  
+  .dark-mode-toggle input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+
+  @media (max-width: 768px) {
+    .dashboard {
+      flex-direction: column; /* 모바일에서는 세로 배치 */
+    }
+  
+    .sidebar {
+      width: 100%; /* 모바일에서는 전체 너비 */
+    }
+  }
