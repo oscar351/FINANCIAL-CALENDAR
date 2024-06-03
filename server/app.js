@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./config/swagger-output.json')
 

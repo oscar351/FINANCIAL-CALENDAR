@@ -3,7 +3,6 @@ var router = express.Router();
 const maria = require('../database/connect/maria');
 const QUERY = require('../database/source/query_info');
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
