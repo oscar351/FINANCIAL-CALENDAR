@@ -1,1 +1,1 @@
-exports.USER_LOGIN = "/login";
+exports.USER_LOGIN = "select MEMBER_ID from user WHERE MEMBER_ID = ?";

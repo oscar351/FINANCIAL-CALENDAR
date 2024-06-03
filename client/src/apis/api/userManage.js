@@ -3,7 +3,7 @@ import { defaultInstance, authInstance } from "../utils/index.js";
 export const login = async (id, password) => {
     try{
         const { data } = await defaultInstance.post("login", {
-            id : id,
+            id : "master",
             password : password
         })
         return data

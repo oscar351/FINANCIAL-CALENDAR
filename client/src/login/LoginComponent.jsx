@@ -20,7 +20,7 @@ function LoginComponent() {
     await login(userId, password)
         // .then(LoginData)
         .then((res) => {
-          sessionStorage.setItem("isAuthorized", true)
+          // sessionStorage.setItem("isAuthorized", true)
           console.log(res)
         })
   }
