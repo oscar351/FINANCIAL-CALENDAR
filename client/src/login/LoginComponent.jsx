@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'; // useEffect 추가
+import { Routes, Navigate, Route, useSearchParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import '../css/login.css';
 import { login } from "../apis/api/userManage"
 // import { LoginData } from "../apis/services/post"
-// import KakaoLogin from "./kakaoLogin";
-import kakaoLogo from '../assets/images/btn_kakao.svg'; // 카카오 로고 이미지 import
+import KakaoLogin from "./kakaoLogin";
 import googleLogo from '../assets/images/btn_google.svg'; // 구글 로고 이미지 import
 import naverLogo from '../assets/images/btn_naver.svg'; // 네이버 로고 이미지 import
 
@@ -61,9 +61,7 @@ function LoginComponent() {
         </div>
         <button className="button" onClick={submit}>로그인</button>
         <div className="social-login">
-        <button className="social-button kakao">
-          <img src={kakaoLogo} alt="카카오 로고" /> 카카오로 로그인하기
-        </button>
+        <KakaoLogin></KakaoLogin>
         <button className="social-button google">
           <img src={googleLogo} alt="구글 로고" /> 구글로 로그인하기
         </button>
@@ -80,6 +78,9 @@ function LoginComponent() {
         <input type="checkbox" checked={darkMode} onChange={handleDarkModeToggle} />
         <span className="slider"></span>
       </label>
+      <Routes>
+        <Route path="/auth/kakao" element={<KakaoLogin />} />
+      </Routes>
     </div>
   );
 }

@@ -15,19 +15,16 @@ const doc = {
     },
     servers: [
       {
-        url: 'http://localhost:500',              // by default: 'http://localhost:3000'
+        url: 'http://localhost:5000',              // by default: 'http://localhost:3000'
         description: '개발 서버'       // by default: ''
       },
-      // { ... }
     ],
     tags: [                   // by default: empty Array
       {
-        name: '',             // Tag name
-        description: ''       // Tag description
+        name: 'User API',             // Tag name
+        description: '사용자 관련 API'       // Tag description
       },
-      // { ... }
-    ],
-    components: {}            // by default: empty object
+    ]
   };
 // const specs = swaggereJsdoc(options)
 

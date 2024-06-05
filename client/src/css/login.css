@@ -40,6 +40,11 @@
     align-items: center; /* 가운데 정렬 */
     margin-top: 20px;
   }
+
+  .social-login a{
+    width: 100%;
+    text-decoration: none;
+  }
   
   .social-button {
     background-color: #f2f2f2; /* 옅은 회색 배경 */

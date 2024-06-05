@@ -1,13 +1,14 @@
-function KakaoLogin() {
-    const client_id = process.env.REACT_APP_KAKAO_CLIENT_ID;
-    const redirect_uri = process.env.REACT_APP_KAKAO_REDIRECT_URI;
-  
-    const url = `https://kauth.kakao.com/oauth/authorize?scope=account_email&client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&prompt=login`;
+import kakaoLogo from '../assets/images/btn_kakao.svg'; // 카카오 로고 이미지 import
 
-    const loginKaKao = () => {
-      window.location.href = url;
-    }
-    return <button img="./img/login/kakao.png" onClick={loginKaKao}>카카오톡 로그인</button>
+import { loginKakao } from "../apis/api/userManage"
+import { Link } from 'react-router-dom';
+
+function KakaoLogin() {
+    const loginUrl = `${process.env.REACT_APP_BACKEND_SERVER_URL}/auth/kakao`;
+
+    return (
+      <a href={loginUrl}><button className="social-button kakao"><img src={kakaoLogo} alt="카카오 로고" />카카오로 로그인하기</button></a>
+    );
   }
   
   export default KakaoLogin;

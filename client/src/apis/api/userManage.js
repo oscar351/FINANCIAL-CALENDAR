@@ -2,10 +2,19 @@ import { defaultInstance, authInstance } from "../utils/index.js";
 
 export const login = async (id, password) => {
     try{
-        const { data } = await defaultInstance.post("login", {
+        const { data } = await defaultInstance.post("auth/login", {
             id : "master",
-            password : password
+            password : "dlrlals5"
         })
+        return data
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+export const logout = async () => {
+    try{
+        const { data } = await defaultInstance.get("auth/logout")
         return data
     } catch(error) {
         console.log(error)
@@ -14,7 +23,7 @@ export const login = async (id, password) => {
 
 export const loginKakao = async (code) => {
     try{
-        const { data } = await defaultInstance.post("login", {
+        const { data } = await defaultInstance.get("auth/kakao", {
             authorizationCode: code
           })
         return data

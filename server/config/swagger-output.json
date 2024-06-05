@@ -7,40 +7,30 @@
   },
   "servers": [
     {
-      "url": "http://localhost:500",
+      "url": "http://localhost:5000",
       "description": "개발 서버"
     }
   ],
   "tags": [
     {
-      "name": "",
-      "description": ""
+      "name": "User API",
+      "description": "사용자 관련 API"
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/login": {
+    "/auth/login": {
       "post": {
         "tags": [
-          "test"
+          "User API"
         ],
-        "summary": "test",
-        "description": "test",
+        "summary": "로그인 API",
+        "description": "로그인",
         "responses": {
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "requestBody": {
@@ -51,6 +41,9 @@
                 "properties": {
                   "id": {
                     "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
                   }
                 }
               }
@@ -59,16 +52,64 @@
         }
       }
     },
-    "/users/": {
+    "/auth/refresh": {
       "get": {
-        "tags": [
-          "test"
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refresh",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
-        "summary": "test",
-        "description": "test",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/kakao": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/kakao/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
