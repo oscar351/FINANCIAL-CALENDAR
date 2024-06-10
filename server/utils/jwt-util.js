@@ -7,7 +7,7 @@ const secret = process.env.JWT_SECRET_KEY;
 module.exports = {
     sign : (user) => {
         const payload = {
-            id : user.id,
+            email : user.email,
             role : user.role,
         };
         return jwt.sign(payload, secret, {
@@ -21,7 +21,7 @@ module.exports = {
             decoded = jwt.verify(token, secret);
             return {
                 ok : true,
-                id : decoded.id,
+                email : decoded.email,
                 role : decoded.role
             };
         } catch(err){

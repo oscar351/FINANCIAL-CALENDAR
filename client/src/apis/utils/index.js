@@ -9,10 +9,12 @@ const axiosApi = (url, options) => {
 }
 
 const axiosAuthApi = (url, options) => {
-    // const token = getItem('userInfo');
+    const accessToken = sessionStorage.getItem("accessToken");
+    const refreshToken = sessionStorage.getItem("refreshToken");
+    
     const instance = axios.create({
         baseURL : url,
-        headers : {Authorization: 'Bearer '},
+        headers : {authorization: 'Bearer ' + accessToken},
         ...options,
     })
     return instance

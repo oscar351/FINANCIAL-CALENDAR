@@ -1,47 +1,48 @@
 const passport = require("passport");
-const KakaoStrategy = require("passport-kakao").Strategy;
+const NaverStrategy = require("passport-google-oauth2").Strategy;
 const jwt = require('../utils/jwt-util');
 const client = require('../client');
-// const { Users } = require("");
-
 
 module.exports = () => {
 
     passport.use(
-        new KakaoStrategy(
+        new NaverStrategy(
             {
-                clientID : process.env.KAKAO_CLIENT,
-                callbackURL : "/auth/kakao/callback"
-            },
-            async (accessToken, refreshToken, profile, done) => {
+                clientID: process.env.GOOGLE_CLIENT,
+                clientSecret: process.env.GOOGLE_SECRET,
+                callbackURL: '/auth/google/callback',
+                passReqToCallback : true,
+            }, 
+            async(request, accessToken, refreshToken, profile, done) => {
                 try {
                     const exUser = await client.users.findFirst({
-                        where : {
-                            email : profile._json.kakao_account.email,
-                            provider : "KAKAO"
-                        }
+                            where: { 
+                                email : profile._json.email,
+                                provider : "GOOGLE"
+                            },
                     });
-                    if(exUser){
+                    if(exUser) {
                         const accessToken = jwt.sign(exUser);
                         const refreshToken = jwt.refresh();
                         return done(null, {accessToken : accessToken, refreshToken : refreshToken});
-                    }else{
+                    } else {
+                        
                         const newUser = await client.users.create({
                             data : {
-                                email : profile._json.kakao_account.email,
+                                email: profile._json.email,
                                 username : profile.displayName,
-                                provider : "KAKAO"
+                                provider : "GOOGLE"
                             }
                         });
                         const accessToken = jwt.sign(newUser);
                         const refreshToken = jwt.refresh();
                         return done(null, {accessToken : accessToken, refreshToken : refreshToken});
                     }
-                } catch(err){
+                } catch(err) {
                     console.error(err);
                     done(err);
                 }
             }
         )
-    )
+    );
 }

@@ -5,23 +5,32 @@ import '../css/login.css';
 import { login } from "../apis/api/userManage"
 // import { LoginData } from "../apis/services/post"
 import KakaoLogin from "./kakaoLogin";
-import googleLogo from '../assets/images/btn_google.svg'; // 구글 로고 이미지 import
-import naverLogo from '../assets/images/btn_naver.svg'; // 네이버 로고 이미지 import
+import NaverLogin from "./naverLogin";
+import GoogleLogin from "./googleLogin";
 
 
 function LoginComponent() {   
 
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  })
 
-  // const navigate = useNavigate();
+  const handleChange = e => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    })
+  }
 
   async function submit() {
-    await login(userId, password)
+    await login(values.email, values.password)
         // .then(LoginData)
         .then((res) => {
           // sessionStorage.setItem("isAuthorized", true)
-          console.log(res)
+          sessionStorage.setItem("accessToken", res.value.accessToken);
+          sessionStorage.setItem("refreshToken", res.value.refreshToken);
+          window.location.href="/";
         })
   }
 
@@ -54,20 +63,16 @@ function LoginComponent() {
       <div className="login-box">
         <h2 className="login-title">로그인</h2>
         <div className="input-group">
-          <input type="text" placeholder="아이디" />
+          <input type="text" placeholder="아이디" name='email' value={values.email} onChange={handleChange}/>
         </div>
         <div className="input-group">
-          <input type="password" placeholder="비밀번호" />
+          <input type="password" placeholder="비밀번호" name='password' value={values.password} onChange={handleChange}/>
         </div>
-        <button className="button" onClick={submit}>로그인</button>
+        <input type="button" value="로그인" className='button' onClick={submit}/>
         <div className="social-login">
         <KakaoLogin></KakaoLogin>
-        <button className="social-button google">
-          <img src={googleLogo} alt="구글 로고" /> 구글로 로그인하기
-        </button>
-        <button className="social-button naver">
-          <img src={naverLogo} alt="네이버 로고" /> 네이버로 로그인하기
-        </button>
+        <NaverLogin></NaverLogin>
+        <GoogleLogin></GoogleLogin>
       </div>
         <div className="find-register-info">
         <a href="#">아이디/비밀번호 찾기</a> 

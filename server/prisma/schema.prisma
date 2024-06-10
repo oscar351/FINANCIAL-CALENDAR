@@ -14,10 +14,12 @@ enum Role {
 
 model Users {
   id         Int        @id @default(autoincrement())
-  username   String     @unique @db.VarChar(255)
-  email      String     @unique @db.VarChar(255)
+  username   String     @db.VarChar(255)
+  email      String     @db.VarChar(255)
   password   String     @db.VarChar(255)  @default("")
+  provider   String     @db.VarChar(10)
   thumbnail_image_url   String  @db.VarChar(255)  @default("")
   profile_image_url     String  @db.VarChar(255)  @default("")
   role       Role       @default(USER)
+  @@unique([username, email, provider], name: "createProvider")
 }

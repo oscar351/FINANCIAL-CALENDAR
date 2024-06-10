@@ -39,7 +39,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "email": {
                     "example": "any"
                   },
                   "password": {
@@ -48,6 +48,25 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -104,7 +123,37 @@
         }
       }
     },
-    "/auth/logout": {
+    "/auth/naver": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/naver/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
       "get": {
         "description": "",
         "responses": {

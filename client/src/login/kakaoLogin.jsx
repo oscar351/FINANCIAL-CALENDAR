@@ -1,8 +1,5 @@
 import kakaoLogo from '../assets/images/btn_kakao.svg'; // 카카오 로고 이미지 import
 
-import { loginKakao } from "../apis/api/userManage"
-import { Link } from 'react-router-dom';
-
 function KakaoLogin() {
     const loginUrl = `${process.env.REACT_APP_BACKEND_SERVER_URL}/auth/kakao`;
 
