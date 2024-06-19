@@ -10,7 +10,7 @@
 
 
   .button {
-    background-color: #e91e63; /* 진한 핑크 */
+    background-color: #03c75a; /* 진한 핑크 */
     color: white;
     padding: 12px 20px; /* 패딩 증가 */
     border: none;
@@ -22,16 +22,16 @@
   }
 
   .button:hover {
-    background-color: #d81b60; /* 더 진한 핑크 */
+    background-color: #03aa4e; /* 더 진한 핑크 */
   }
 
     /* 다크 모드에서 로그인 버튼 스타일 */
     .dark-mode .button {
-        background-color: #BA55D3; /* 연두색 */
+        background-color: #03c75a; /* 연두색 */
       }
       
       .dark-mode .button:hover {
-        background-color: #b43ed1;
+        background-color: #03aa4e;
       }
 
       /* 다크 모드 토글 스위치 스타일 */
@@ -73,7 +73,7 @@
   }
 
   .dark-mode-toggle input:checked + .slider {
-    background-color: #f50057; /* 핫핑크 */
+    background-color: #03c75a; /* 핫핑크 */
   }
   
   .dark-mode-toggle input:checked + .slider:before {

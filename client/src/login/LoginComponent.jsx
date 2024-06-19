@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'; // useEffect 추가
-import { Routes, Navigate, Route, useSearchParams } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import '../css/login.css';
 import { login } from "../apis/api/userManage"
-// import { LoginData } from "../apis/services/post"
 import KakaoLogin from "./kakaoLogin";
 import NaverLogin from "./naverLogin";
 import GoogleLogin from "./googleLogin";
-
+import UserInfo from "./FindUserInfo";
 
 function LoginComponent() {   
 
@@ -27,10 +25,15 @@ function LoginComponent() {
     await login(values.email, values.password)
         // .then(LoginData)
         .then((res) => {
+          console.log(res);
+          if(res.code === 200){
+            sessionStorage.setItem("accessToken", res.value.accessToken);
+            sessionStorage.setItem("refreshToken", res.value.refreshToken);
+            window.location.href="/";
+          }else{
+            alert("code " + res.code + " : " + res.message);
+          }
           // sessionStorage.setItem("isAuthorized", true)
-          sessionStorage.setItem("accessToken", res.value.accessToken);
-          sessionStorage.setItem("refreshToken", res.value.refreshToken);
-          window.location.href="/";
         })
   }
 
@@ -75,7 +78,7 @@ function LoginComponent() {
         <GoogleLogin></GoogleLogin>
       </div>
         <div className="find-register-info">
-        <a href="#">아이디/비밀번호 찾기</a> 
+        <a href="/findUserInfo">아이디/비밀번호 찾기</a> 
         <a href="#" className="register-button">회원가입</a>
         </div>
       </div>
@@ -84,7 +87,7 @@ function LoginComponent() {
         <span className="slider"></span>
       </label>
       <Routes>
-        <Route path="/auth/kakao" element={<KakaoLogin />} />
+        <Route path="/findUserInfo" element={<UserInfo />} />
       </Routes>
     </div>
   );
