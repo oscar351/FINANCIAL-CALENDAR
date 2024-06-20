@@ -21,22 +21,37 @@ export const logout = async () => {
     }
 }
 
-export const loginKakao = async (code) => {
-    try{
-        const { data } = await defaultInstance.get("auth/kakao", {
-            authorizationCode: code
-          })
-        return data
-    } catch(error) {
-        console.log(error)
-    }
-}
-
-
 export const postCreate = async (formData) => {
     try{
         await authInstance.post('~~', formData)
     }catch(error){
-        console.log(error)
+        console.log(error);
+    }
+}
+
+export const findUserId = async (formdata) => {
+    try{
+        const { data } = await defaultInstance.post("users/findUserId", formdata);
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const resetUserPassword = async(formdata) => {
+    try{
+        const { data } = await defaultInstance.post("users/resetUserPassword", formdata);
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const updateUserPassword = async(formdata) => {
+    try{
+        const { data } = await defaultInstance.put("users/updateUserPassword", formdata);
+        return data
+    }catch(error){
+        console.log(error);
     }
 }

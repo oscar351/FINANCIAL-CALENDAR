@@ -42,54 +42,54 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
           <FaHome /> Dashboard
         </button>
 
-        <button className={activePage === 'accountBook' ? 'active' : ''} onClick={() => toggleSubMenu('accountBook')}>
+        <button onClick={() => toggleSubMenu('accountBook')}>
           <FaMoneyBillWave /> 가계부 <FaChevronDown className={`submenu-arrow ${isAccountBookMenuOpen ? 'open' : ''}`} />
         </button>
         {isAccountBookMenuOpen && (
           <div className="submenu">
-            <button onClick={(e) => handleSubMenuClick('accountBookInput', e)}>입력</button>
-            <button onClick={(e) => handleSubMenuClick('accountBookView', e)}>조회</button>
-            <button onClick={(e) => handleSubMenuClick('accountBookStats', e)}>통계</button>
+            <button className={activePage === 'accountBookInput' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookInput', e)}>입력</button>
+            <button className={activePage === 'accountBookView' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookView', e)}>조회</button>
+            <button className={activePage === 'accountBookStats' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookStats', e)}>통계</button>
           </div>
         )}
 
-        <button className={activePage === 'calendar' ? 'active' : ''} onClick={() => toggleSubMenu('calendar')}>
+        <button onClick={() => toggleSubMenu('calendar')}>
           <FaCalendarAlt /> 캘린더 <FaChevronDown className={`submenu-arrow ${isCalendarMenuOpen ? 'open' : ''}`} />
         </button>
         {isCalendarMenuOpen && (
           <div className="submenu">
-            <button onClick={(e) => handleSubMenuClick('calendarMonth', e)}>월별</button>
-            <button onClick={(e) => handleSubMenuClick('calendarWeek', e)}>주별</button>
-            <button onClick={(e) => handleSubMenuClick('calendarDay', e)}>일별</button>
+            <button className={activePage === 'calendarMonth' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarMonth', e)}>월별</button>
+            <button className={activePage === 'calendarWeek' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarWeek', e)}>주별</button>
+            <button className={activePage === 'calendarDay' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarDay', e)}>일별</button>
           </div>
         )}
 
-        <button className={activePage === 'report' ? 'active' : ''} onClick={() => toggleSubMenu('report')}>
+        <button onClick={() => toggleSubMenu('report')}>
           <FaChartBar /> 보고서 <FaChevronDown className={`submenu-arrow ${isReportMenuOpen ? 'open' : ''}`} />
         </button>
         {isReportMenuOpen && (
           <div className="submenu">
-            <button onClick={(e) => handleSubMenuClick('ReportDays', e)}>월별/연간 보고서</button>
-            <button onClick={(e) => handleSubMenuClick('ReportCategories', e)}>카테고리별 보고서</button>
-            <button onClick={(e) => handleSubMenuClick('ReportOrner', e)}>맞춤형보고서</button>
+            <button className={activePage === 'ReportDays' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportDays', e)}>월별/연간 보고서</button>
+            <button className={activePage === 'ReportCategories' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportCategories', e)}>카테고리별 보고서</button>
+            <button className={activePage === 'ReportOrner' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportOrner', e)}>맞춤형보고서</button>
           </div>
         )}
-        <button onClick={() => onSelectPage('budget')}>
+        <button className={activePage === 'budget' ? 'active' : ''} onClick={() => onSelectPage('budget')}>
           <FaPiggyBank /> 예산관리
         </button>
-        <button onClick={() => onSelectPage('goals')}>
+        <button className={activePage === 'goals' ? 'active' : ''} onClick={() => onSelectPage('goals')}>
           <FaBullseye /> 목표 설정
         </button>
-        <button onClick={() => onSelectPage('assets')}>
+        <button className={activePage === 'assets' ? 'active' : ''} onClick={() => onSelectPage('assets')}>
           <FaChartBar /> 자산 관리
         </button>
-        <button onClick={() => onSelectPage('notification')}>
+        <button className={activePage === 'notification' ? 'active' : ''} onClick={() => onSelectPage('notification')}>
           <FaBell /> 알림
         </button>
-        <button onClick={() => onSelectPage('share')}>
+        <button className={activePage === 'share' ? 'active' : ''} onClick={() => onSelectPage('share')}>
           <FaShareAlt /> 공유
         </button>
-        <button onClick={() => onSelectPage('help')}>
+        <button className={activePage === 'help' ? 'active' : ''} onClick={() => onSelectPage('help')}>
           <FaQuestionCircle /> 도움말
         </button>
       </div>

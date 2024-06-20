@@ -16,10 +16,11 @@ model Users {
   id         Int        @id @default(autoincrement())
   username   String     @db.VarChar(255)
   email      String     @db.VarChar(255)
+  phoneNumber String    @db.Char(13) @default("")
   password   String     @db.VarChar(255)  @default("")
   provider   String     @db.VarChar(10)
-  thumbnail_image_url   String  @db.VarChar(255)  @default("")
-  profile_image_url     String  @db.VarChar(255)  @default("")
+  thumbnailImageUrl   String  @db.VarChar(255)  @default("")
+  profileImageUrl     String  @db.VarChar(255)  @default("")
   role       Role       @default(USER)
   @@unique([username, email, provider], name: "createProvider")
 }

@@ -9,7 +9,7 @@ import '../css/dashboard.css';
 // const navigate = useNavigate();
 function BoardComponent() {   
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [activePage, setActivePage] = useState('MyPage'); // 초기 페이지: 캘린더
+  const [activePage, setActivePage] = useState('Dashboard'); // 초기 페이지: 캘린더
 
   useEffect(() => {
     const timer = setInterval(() => {

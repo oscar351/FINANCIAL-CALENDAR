@@ -2,27 +2,31 @@ import React from "react";
 import { Routes, Navigate, Route, useSearchParams } from "react-router-dom";
 import LoginComponent from "../login/LoginComponent";
 import BoardComponent from "./BoardComponent";
+import FindUserInfo from "../login/FindUserInfo"
+import Register from "../login/Register"
 
 function MainComponent() {   
     const [searchParams, setSearchParams] = useSearchParams();
-    // console.log(searchParams.get("accessToken"))
-      // sessionStorage.setItem("accessToken", "");
-      // sessionStorage.setItem("refreshToken", "");
+    
     if(searchParams.get("accessToken")){
       sessionStorage.setItem("accessToken", searchParams.get("accessToken"))
       sessionStorage.setItem("refreshToken", searchParams.get("refreshToken"))
+      window.location.href="/"
     }
 
     let accessToken = sessionStorage.getItem("accessToken");
-    // let refreshToken = sessionStorage.getItem("refreshToken");
-    // console.log(accessToken);
+    
   return (
-    <div>
-      {!accessToken ? <Navigate to="/login" /> : <Navigate to="/" />}
-        <Routes>
-	        <Route path="/login/*" element={<LoginComponent />} />
-	        <Route path="/" element={<BoardComponent />} />
-        </Routes>
+    <div className="MainComponent">
+      <Routes>
+        <Route path="/login/*" element={<LoginComponent />} />
+        <Route
+          path="/"
+          element={accessToken ? <BoardComponent /> : <Navigate to="/login" />}
+        />
+        <Route path="/findUserInfo" element={<FindUserInfo />} />  {/* 로그인 여부 상관없이 접근 가능 */}
+        <Route path="/Register" element={<Register />} />  {/* 로그인 여부 상관없이 접근 가능 */}
+      </Routes>
     </div>
   );
 }

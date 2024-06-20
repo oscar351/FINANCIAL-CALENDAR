@@ -4,10 +4,10 @@
   }
   
   .sidebar {
-    background-color: #6200EE; /* 보라색 배경 */
+    background-color: #03c75bc2; /* 보라색 배경 */
     color: white; /* 흰색 텍스트 */
-    padding: 20px;
-    width: 250px; /* 너비 300px로 변경 */
+    padding: 20px 0px 20px 0px;
+    width: 300px; /* 너비 300px로 변경 */
     position: relative;
   }
 
@@ -19,7 +19,7 @@
     background-color: transparent; /* 배경 투명 */
     border: none;
     color: white;
-    padding: 10px 0; /* 위아래 패딩만 */
+    padding: 10px 15px 10px 15px;
     margin-bottom: 15px;
     font-size: 16px;
     cursor: pointer;
@@ -42,6 +42,7 @@
   .sidebar .profile {
     display: flex;
     align-items: center;
+    padding: 0px 15px 0px 15px;
     margin-bottom: 20px;
   }
 
@@ -67,7 +68,7 @@
     background-color: transparent;
     border: none;
     color: white;
-    padding: 10px 0;
+    padding: 10px 15px 10px 15px;
     margin-top: 20px; /* 위쪽 여백 추가 */
     font-size: 16px;
     cursor: pointer;
@@ -114,7 +115,7 @@
   
   .top-bar .search-bar button {
     padding: 10px;
-    background-color: #6200EE; /* 보라색 버튼 */
+    background-color: #03c75a; /* 보라색 버튼 */
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
