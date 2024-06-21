@@ -94,6 +94,7 @@
   .submenu-arrow.open {
     transform: rotate(180deg); /* 아래쪽 화살표로 변경 */
   }
+  
   .top-bar {
     display: flex;
     justify-content: space-between; /* 검색창과 시간 양쪽 배치 */
@@ -121,11 +122,8 @@
     border-radius: 0 5px 5px 0;
     cursor: pointer;
   }
-  .calendar .react-calendar__tile--active {
-    background-color: #f50057; /* 캘린더 활성 날짜 색상 */
-  }
 
-.content {
+  .content {
     flex: 1;
     padding: 20px;
     transition: opacity 0.3s ease-in-out;
@@ -137,21 +135,6 @@
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   .dashboard-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 나눔 */

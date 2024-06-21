@@ -24,30 +24,7 @@
   .button:hover {
     background-color: #03aa4e; /* 더 진한 핑크 */
   }
-
-    /* 다크 모드에서 로그인 버튼 스타일 */
-    .dark-mode .button {
-        background-color: #03c75a; /* 연두색 */
-      }
-      
-      .dark-mode .button:hover {
-        background-color: #03aa4e;
-      }
-
-      /* 다크 모드 토글 스위치 스타일 */
-  .dark-mode-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px; /* 너비 고정 */
-    height: 20px;
-  }
-  
-  .dark-mode-toggle input[type="checkbox"] {
-    display: none;
-  }
  
-  
   .slider {
     position: absolute;
     cursor: pointer;
@@ -70,14 +47,6 @@
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s;
-  }
-
-  .dark-mode-toggle input:checked + .slider {
-    background-color: #03c75a; /* 핫핑크 */
-  }
-  
-  .dark-mode-toggle input:checked + .slider:before {
-    transform: translateX(20px);
   }
 
   @media (max-width: 768px) {

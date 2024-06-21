@@ -9,7 +9,7 @@ function FindIdResultModal({ isOpen, onRequestClose, foundId, errMsg }) {
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} className="modal">
       <div className="modal-content">
         <h2>아이디 찾기 결과</h2>
-        {foundId ? ( // foundId가 있으면 아이디 표시, 없으면 메시지 표시
+        {foundId ? (
           <>
           <p>회원님의 아이디는 <strong>{foundId}</strong> 입니다.</p>
           <button onClick={onRequestClose}>닫기</button>

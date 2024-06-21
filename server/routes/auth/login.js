@@ -2,7 +2,6 @@ const client = require('../../client');
 const jwt = require('../../utils/jwt-util');
 const { redisClient } = require('../../utils/redis');
 const bcrypt = require('bcrypt');
-const bcrypt = require('bcrypt');
 
 const login = async (req, res, next) => {
   /**

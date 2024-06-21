@@ -1,98 +1,108 @@
 import React, { useState } from 'react';
-import {
-  FaHome, FaMoneyBillWave, FaCalendarAlt, FaChartBar, FaCog, FaUser,
-  FaSignOutAlt, FaChevronDown, FaPiggyBank, FaBullseye, FaShareAlt, FaQuestionCircle, FaBell
-} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // useNavigate 추가
+import { FaHome, FaMoneyBillWave, FaCalendarAlt, FaChartBar, FaSignOutAlt, FaChevronDown, FaPiggyBank, FaBullseye, FaShareAlt, FaQuestionCircle, FaBell } from 'react-icons/fa';
 import profileImage from '../assets/images/profile.png';
 
 function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
-  const [isAccountBookMenuOpen, setIsAccountBookMenuOpen] = useState(false);
-  const [isCalendarMenuOpen, setIsCalendarMenuOpen] = useState(false);
-  const [isReportMenuOpen, setIsReportMenuOpen] = useState(false);
-
-  const handleSubMenuClick = (page, e) => {
-    e.stopPropagation();
-    onSelectPage(page);
-  };
+  const navigate = useNavigate(); // useNavigate 추가
+  const [openMenus, setOpenMenus] = useState({});
 
   const toggleSubMenu = (menu) => {
-    if (menu === 'accountBook') {
-      setIsAccountBookMenuOpen(!isAccountBookMenuOpen);
-    } else if (menu === 'calendar') {
-      setIsCalendarMenuOpen(!isCalendarMenuOpen);
-    } else if (menu === 'report'){
-      setIsReportMenuOpen(!isReportMenuOpen)
-    }
+    setOpenMenus(prevMenus => ({
+      ...prevMenus,
+      [menu]: !prevMenus[menu]
+    }));
   };
 
   const handleLogout = () => {
-    sessionStorage.setItem("accessToken", "");
-    sessionStorage.setItem("refreshToken", "");
-    window.location.href="/";
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
+    navigate("/login");
   };
+
+  const menuItems = [
+    { name: 'Dashboard', iconType: FaHome, path: 'Dashboard' },
+    {
+      name: '가계부',
+      iconType: FaMoneyBillWave,
+      path: 'accountBook',
+      subItems: [
+        { name: '입력', path: 'accountBookInput' },
+        { name: '조회', path: 'accountBookView' },
+        { name: '통계', path: 'accountBookStats' },
+      ],
+    },
+    {
+      name: '캘린더',
+      iconType: FaCalendarAlt,
+      path: 'calendar',
+      subItems: [
+        { name: '월별', path: 'calendarMonth' },
+        { name: '주별', path: 'calendarWeek' },
+        { name: '일별', path: 'calendarDay' },
+      ],
+    },
+    {
+      name: '보고서',
+      iconType: FaChartBar,
+      path: 'report',
+      subItems: [
+        { name: '월별/연간 보고서', path: 'ReportDays' },
+        { name: '카테고리별 보고서', path: 'ReportCategories' },
+        { name: '맞춤형 보고서', path: 'ReportOrner' },
+      ],
+    },
+    { name: '예산 관리', iconType: FaPiggyBank, path: 'budget' },
+    { name: '목표 설정', iconType: FaBullseye, path: 'goals' },
+    { name: '자산 관리', iconType: FaChartBar, path: 'assets' },
+    { name: '알림', iconType: FaBell, path: 'notification' },
+    { name: '공유', iconType: FaShareAlt, path: 'share' },
+    { name: '도움말', iconType: FaQuestionCircle, path: 'help' },
+  ];
   
   return (
     <div className="sidebar">
+      {/* 프로필 */}
       <div className={activePage === 'MyPage' ? 'profile active' : 'profile'} onClick={() => onSelectPage('MyPage')}>
         <img src={profileImage} alt="프로필 사진" className="profile-image" />
         <span className="nickname">닉네임</span>
       </div>
+      {/* 메뉴 */}
       <div className="menu-section">
-        <button className={activePage === 'Dashboard' ? 'active' : ''} onClick={() => onSelectPage('Dashboard')}>
-          <FaHome /> Dashboard
-        </button>
+        {menuItems.map(item => {
+          // handleSubMenuClick 함수를 map 내부에서 정의
+          const handleSubMenuClick = (page, e) => { 
+            e.stopPropagation();
+            onSelectPage(page);
+          };
 
-        <button onClick={() => toggleSubMenu('accountBook')}>
-          <FaMoneyBillWave /> 가계부 <FaChevronDown className={`submenu-arrow ${isAccountBookMenuOpen ? 'open' : ''}`} />
-        </button>
-        {isAccountBookMenuOpen && (
-          <div className="submenu">
-            <button className={activePage === 'accountBookInput' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookInput', e)}>입력</button>
-            <button className={activePage === 'accountBookView' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookView', e)}>조회</button>
-            <button className={activePage === 'accountBookStats' ? 'active' : ''} onClick={(e) => handleSubMenuClick('accountBookStats', e)}>통계</button>
-          </div>
-        )}
-
-        <button onClick={() => toggleSubMenu('calendar')}>
-          <FaCalendarAlt /> 캘린더 <FaChevronDown className={`submenu-arrow ${isCalendarMenuOpen ? 'open' : ''}`} />
-        </button>
-        {isCalendarMenuOpen && (
-          <div className="submenu">
-            <button className={activePage === 'calendarMonth' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarMonth', e)}>월별</button>
-            <button className={activePage === 'calendarWeek' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarWeek', e)}>주별</button>
-            <button className={activePage === 'calendarDay' ? 'active' : ''} onClick={(e) => handleSubMenuClick('calendarDay', e)}>일별</button>
-          </div>
-        )}
-
-        <button onClick={() => toggleSubMenu('report')}>
-          <FaChartBar /> 보고서 <FaChevronDown className={`submenu-arrow ${isReportMenuOpen ? 'open' : ''}`} />
-        </button>
-        {isReportMenuOpen && (
-          <div className="submenu">
-            <button className={activePage === 'ReportDays' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportDays', e)}>월별/연간 보고서</button>
-            <button className={activePage === 'ReportCategories' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportCategories', e)}>카테고리별 보고서</button>
-            <button className={activePage === 'ReportOrner' ? 'active' : ''} onClick={(e) => handleSubMenuClick('ReportOrner', e)}>맞춤형보고서</button>
-          </div>
-        )}
-        <button className={activePage === 'budget' ? 'active' : ''} onClick={() => onSelectPage('budget')}>
-          <FaPiggyBank /> 예산관리
-        </button>
-        <button className={activePage === 'goals' ? 'active' : ''} onClick={() => onSelectPage('goals')}>
-          <FaBullseye /> 목표 설정
-        </button>
-        <button className={activePage === 'assets' ? 'active' : ''} onClick={() => onSelectPage('assets')}>
-          <FaChartBar /> 자산 관리
-        </button>
-        <button className={activePage === 'notification' ? 'active' : ''} onClick={() => onSelectPage('notification')}>
-          <FaBell /> 알림
-        </button>
-        <button className={activePage === 'share' ? 'active' : ''} onClick={() => onSelectPage('share')}>
-          <FaShareAlt /> 공유
-        </button>
-        <button className={activePage === 'help' ? 'active' : ''} onClick={() => onSelectPage('help')}>
-          <FaQuestionCircle /> 도움말
-        </button>
+          return (
+            <React.Fragment key={item.path}>
+              <button 
+                className={activePage === item.path ? 'active' : ''}
+                onClick={() => item.subItems ? toggleSubMenu(item.path) : onSelectPage(item.path)}
+              >
+                {item.iconType && <item.iconType />} {item.name}
+                {item.subItems && <FaChevronDown className={`submenu-arrow ${openMenus[item.path] ? 'open' : ''}`} />}
+              </button>
+              {item.subItems && openMenus[item.path] && (
+                <div className="submenu">
+                  {item.subItems.map(subItem => (
+                    <button
+                      key={subItem.path}
+                      className={activePage === subItem.path ? 'active' : ''}
+                      onClick={(e) => handleSubMenuClick(subItem.path, e)}
+                    >
+                      {subItem.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
+      {/* 로그아웃 버튼 */}
       <button className="logout-button" onClick={handleLogout}>
         <FaSignOutAlt /> 로그아웃
       </button>

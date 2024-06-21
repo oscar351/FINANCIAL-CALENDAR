@@ -1,34 +1,35 @@
-import React from "react";
-import { Routes, Navigate, Route, useSearchParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Routes, Navigate, useNavigate, Route, useSearchParams } from "react-router-dom";
 import LoginComponent from "../login/LoginComponent";
 import BoardComponent from "./BoardComponent";
 import FindUserInfo from "../login/FindUserInfo"
 import Register from "../login/Register"
 
 function MainComponent() {   
-    const [searchParams, setSearchParams] = useSearchParams();
-    
-    
-    if(searchParams.get("accessToken")){
-      sessionStorage.setItem("accessToken", searchParams.get("accessToken"))
-      sessionStorage.setItem("refreshToken", searchParams.get("refreshToken"))
-      window.location.href="/"
-      window.location.href="/"
-    }
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-    let accessToken = sessionStorage.getItem("accessToken");
+  useEffect(() => {
+    const accessToken = searchParams.get('accessToken');
+    const refreshToken = searchParams.get('refreshToken');
+
+    if (accessToken && refreshToken) {
+      sessionStorage.setItem('accessToken', accessToken);
+      sessionStorage.setItem('refreshToken', refreshToken);
+      navigate('/'); // 로그인 성공 시 메인 페이지로 이동
+    }
+  }, [navigate, searchParams]); // 의존성 배열에 navigate, searchParams 추가
+
+  const isLoggedIn = !!sessionStorage.getItem('accessToken'); // 로그인 여부 확인
     
     
   return (
     <div className="MainComponent">
       <Routes>
         <Route path="/login/*" element={<LoginComponent />} />
-        <Route
-          path="/"
-          element={accessToken ? <BoardComponent /> : <Navigate to="/login" />}
-        />
-        <Route path="/findUserInfo" element={<FindUserInfo />} />  {/* 로그인 여부 상관없이 접근 가능 */}
-        <Route path="/Register" element={<Register />} />  {/* 로그인 여부 상관없이 접근 가능 */}
+        <Route path="/" element={isLoggedIn ? <BoardComponent /> : <Navigate to="/login" />} />
+        <Route path="/findUserInfo" element={<FindUserInfo />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

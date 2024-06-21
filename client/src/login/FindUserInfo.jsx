@@ -1,70 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FindIdResultModal from './FindIdResult';
 import ResetPasswordModal from './ResetPasswordModal';
 import '../css/FindUserInfo.css';
-
 import { findUserId, resetUserPassword } from "../apis/api/userManage"
 
 function FindAccount() {
-  const [showFindIdResult, setShowFindIdResult] = useState(false);
+  const [activeTab, setActiveTab] = useState('findId');
+  const [formData, setFormData] = useState({ name: '', phoneNumber: '', userId: '' });
+  const [passwordData, setPasswordData] = useState({ username: null, email: null, provider: null });
+  const [showFindIdModal, setShowFindIdModal] = useState(false);
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
   const [foundId, setFoundId] = useState(null);
-  const [errMsg, seterrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-    const [activeTab, setActiveTab] = useState('findId');
-    const [formData, setFormData] = useState({
-      name: '',
-      phone_number: '',
-      userId: '',
-    });
+  useEffect(() => {
+    // 탭 변경 시 폼 데이터 초기화
+    setFormData({ name: '', phoneNumber: '', userId: '' });
+  }, [activeTab]);
 
-    const [passwordData, setpasswordData] = useState({
-      username: '',
-      email: '',
-      provider: '',
-    });
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자만 남김
+    let formattedValue = '';
   
-    const handleTabClick = (tab) => {
-      setActiveTab(tab);
-      setFormData({ name: '', phone_number: '', userId: '' }); // 탭 변경 시 폼 초기화
-    };
+    if (value.length < 4) {
+      formattedValue = value;
+    } else if (value.length < 7) {
+      formattedValue = `${value.slice(0, 3)}-${value.slice(3)}`;
+    } else if (value.length < 11) {
+      formattedValue = `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6)}`;
+    } else {
+      formattedValue = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7, 11)}`;
+    }
   
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+    setFormData({ ...formData, phoneNumber: formattedValue });
+  };
 
-    const handleFindIdSubmit = async (e) => {
-      e.preventDefault();
-
-      await findUserId(formData)
-      // .then(LoginData)
-      .then((res) => {
-        if(res.code === 200){
-          setFoundId(res.value); // 예시 아이디
-          setShowFindIdResult(true);
-        }else{
-          seterrMsg(res.message);
-          setShowFindIdResult(true);
-        }
-
-      })
-    };
+  const handleFindIdSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await findUserId(formData);
+      if (res.code === 200) {
+        setFoundId(res.value);
+      } else {
+        setErrMsg(res.message);
+      }
+      setShowFindIdModal(true);
+    } catch (error) {
+      console.error(error);
+      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
+    }
+  };
   
-    const handleFindPasswordSubmit = async (e) => {
-      e.preventDefault();
+  const handleFindPasswordSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await resetUserPassword(formData);
+      if (res.code === 200) {
+        setPasswordData({ username: res.value.username, email: res.value.email, provider: res.value.provider });
+      } else {
+        setErrMsg(res.message);
+      }
+      setShowResetPasswordModal(true);
+    } catch (error) {
+      console.error(error);
+      // 에러 처리 로직 추가
+    }
+  };
 
-      await resetUserPassword(formData)
-      .then((res) => {
-        if(res.code === 200){
-          setpasswordData({ username: res.value.username, email: res.value.email, provider: res.value.provider }); // 탭 변경 시 폼 초기화
-        }else{
-          setpasswordData({ username: null, email: null, provider: null }); // 탭 변경 시 폼 초기화
-          seterrMsg(res.message);
-        }
-        setShowResetPasswordModal(true);
-      })
-    };
+  const commonInputFields = (
+    <>
+      <div className="input-group">
+        <label htmlFor="name">이름</label>
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+      </div>
+      <div className="input-group">
+        <label htmlFor="phoneNumber">전화번호</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handlePhoneNumberChange} required />
+      </div>
+    </>
+  );
 
   return (
     <div className="find-account-content">
@@ -76,42 +99,37 @@ function FindAccount() {
           비밀번호 초기화
         </button>
       </div>
-
       <div className="tab-content">
         {activeTab === 'findId' && (
-          <div className="find-id-form">
-            <div className="input-group">
-              <label htmlFor="name">이름</label>
-              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-            </div>
-            <div className="input-group">
-              <label htmlFor="email">전화번호</label>
-              <input type="text" id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} required />
-            </div>
-            <button type="submit" onClick={handleFindIdSubmit}>아이디 찾기</button>
-          </div>
+          <form className="find-id-form" onSubmit={handleFindIdSubmit}>
+            {commonInputFields}
+            <button type="submit">아이디 찾기</button>
+          </form>
         )}
-        <FindIdResultModal isOpen={showFindIdResult} onRequestClose={() => setShowFindIdResult(false)} foundId={foundId} errMsg={errMsg}/> {/* 아이디 찾기 결과 화면 */}
+        <FindIdResultModal
+          isOpen={showFindIdModal}
+          onRequestClose={() => setShowFindIdModal(false)}
+          foundId={foundId}
+          errMsg={errMsg}
+        />
         {activeTab === 'findPassword' && (
-          <div className="find-password-form">
+          <form className="find-password-form" onSubmit={handleFindPasswordSubmit}>
             <div className="input-group">
               <label htmlFor="userId">아이디</label>
               <input type="text" id="userId" name="userId" value={formData.userId} onChange={handleChange} required />
             </div>
-            <div className="input-group">
-              <label htmlFor="name">이름</label>
-              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-            </div>
-            <div className="input-group">
-              <label htmlFor="email">전화번호</label>
-              <input type="text" id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} required />
-            </div>
-            <button type="submit" onClick={handleFindPasswordSubmit}>비밀번호 초기화</button>
-          </div>
+            {commonInputFields}
+            <button type="submit">비밀번호 초기화</button>
+          </form>
         )}
-        <ResetPasswordModal isOpen={showResetPasswordModal} onRequestClose={() => setShowResetPasswordModal(false)} passwordData={passwordData} errMsg={errMsg}/> {/* 비밀번호 재설정 모달 */}
-        <div className='loginBtn'>
-          <button type="submit" onClick={() => {window.location.href="/login";}}>로그인 하기</button>
+        <ResetPasswordModal
+          isOpen={showResetPasswordModal}
+          onRequestClose={() => setShowResetPasswordModal(false)}
+          passwordData={passwordData}
+          errMsg={errMsg}
+        />
+        <div className="loginBtn">
+          <button type="submit" onClick={() => { window.location.href = "/login"; }}>로그인 하기</button>
         </div>
       </div>
     </div>

@@ -1,106 +1,58 @@
-import React, { useState, useEffect } from 'react'; // useEffect 추가
-import { Routes, Route } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import '../css/login.css';
-import { login } from "../apis/api/userManage"
+import { login } from "../apis/api/userManage";
 import KakaoLogin from "./kakaoLogin";
 import NaverLogin from "./naverLogin";
 import GoogleLogin from "./googleLogin";
-import UserInfo from "./FindUserInfo";
-import Register from "./Register";
+import { Link } from 'react-router-dom';
 
 function LoginComponent() {   
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  })
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleChange = e => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  async function submit() {
-    await login(values.email, values.password)
-        // .then(LoginData)
-        .then((res) => {
-          console.log(res);
-          if(res.code === 200){
-            sessionStorage.setItem("accessToken", res.value.accessToken);
-            sessionStorage.setItem("refreshToken", res.value.refreshToken);
-            window.location.href="/";
-          }else{
-            alert("code " + res.code + " : " + res.message);
-          }
-          // sessionStorage.setItem("isAuthorized", true)
-          console.log(res);
-          if(res.code === 200){
-            sessionStorage.setItem("accessToken", res.value.accessToken);
-            sessionStorage.setItem("refreshToken", res.value.refreshToken);
-            window.location.href="/";
-          }else{
-            alert("code " + res.code + " : " + res.message);
-          }
-          // sessionStorage.setItem("isAuthorized", true)
-        })
-  }
-
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    // 로컬 스토리지에서 다크 모드 설정 불러오기 (초기값 설정)
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-      setDarkMode(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await login(formData.email, formData.password);
+      if (res.code === 200) {
+        sessionStorage.setItem("accessToken", res.value.accessToken);
+        sessionStorage.setItem("refreshToken", res.value.refreshToken);
+        window.location.href = "/"; // 성공 시 메인 페이지로 이동
+      } else {
+        alert(`code ${res.code}: ${res.message}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("로그인 중 오류가 발생했습니다."); // 에러 메시지 표시
     }
-  }, []); // 컴포넌트 마운트 시에만 실행
-
-  useEffect(() => {
-    // 다크 모드 설정 변경 시 로컬 스토리지에 저장
-    localStorage.setItem('darkMode', darkMode);
-    document.body.classList.toggle('dark-mode', darkMode);
-  }, [darkMode]); // darkMode 상태 변경 시에만 실행
-
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
   };
 
   return (
-    <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>
-      <label className="dark-mode-toggle">
-          <input type="checkbox" checked={darkMode} onChange={handleDarkModeToggle} />
-          <span className="slider"></span>
-        </label>
+    <div className={`login-container`}>
       <div className="login-box">
         <h2 className="login-title">로그인</h2>
-        <div className="input-group">
-          <input type="text" placeholder="아이디" name='email' value={values.email} onChange={handleChange}/>
-        </div>
-        <div className="input-group">
-          <input type="password" placeholder="비밀번호" name='password' value={values.password} onChange={handleChange}/>
-        </div>
-        <input type="button" value="로그인" className='button' onClick={submit}/>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input type="text" placeholder="아이디" name="email" value={formData.email} onChange={handleChange} required />
+          </div>
+          <div className="input-group">
+            <input type="password" placeholder="비밀번호" name="password" value={formData.password} onChange={handleChange} required />
+          </div>
+          <button type="submit" className="button">로그인</button>
+        </form>
         <div className="social-login">
-        <KakaoLogin></KakaoLogin>
-        <NaverLogin></NaverLogin>
-        <GoogleLogin></GoogleLogin>
-      </div>
+          <KakaoLogin />
+          <NaverLogin />
+          <GoogleLogin />
+        </div>
         <div className="find-register-info">
-        <a href="/findUserInfo">아이디/비밀번호 찾기</a> 
-        <a href="/register" className="register-button">회원가입</a>
+          <Link to="/findUserInfo">아이디/비밀번호 찾기</Link>
+          <Link to="/register" className="register-button">회원가입</Link>
         </div>
       </div>
-      <label className="dark-mode-toggle">
-        <input type="checkbox" checked={darkMode} onChange={handleDarkModeToggle} />
-        <span className="slider"></span>
-      </label>
-      <Routes>
-        <Route path="/findUserInfo" element={<UserInfo />} />
-        <Route path="/findUserInfo" element={<UserInfo />} />
-      </Routes>
     </div>
   );
 }

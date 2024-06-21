@@ -27,3 +27,57 @@
     font-size: 0.8rem;
     margin-top: 5px;
   }
+
+  .register-info {
+    text-align: center;
+    margin-top: 15px;
+    display: grid;
+  }
+
+  .register-info a {
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    color: #03c75a;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    position: relative;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .register-info a:hover {
+    background-color: #a4e6c1a4;
+  }
+
+  .email-input-wrapper {
+    display: flex;
+  }
+  
+  .email-input-wrapper input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .email-check-button {
+    background-color: #03c75a;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .email-check-button:hover {
+    background-color: #03aa4e;
+  }
+  
+  .check-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
