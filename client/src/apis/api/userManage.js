@@ -55,3 +55,21 @@ export const updateUserPassword = async(formdata) => {
         console.log(error);
     }
 }
+
+export const checkEmail = async(formdata) => {
+    try{
+        const { data } = await defaultInstance.get(`users/checkEmail?email=${formdata}`);
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const registerUser = async(formdata) => {
+    try{
+        const { data } = await defaultInstance.post(`users/register`, formdata);
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}

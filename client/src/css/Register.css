@@ -77,7 +77,14 @@
   }
   
   .check-message {
-    color: red;
     font-size: 0.8rem;
     margin-top: 5px;
+  }
+  
+  .check-message.success {
+    color: green;
+  }
+  
+  .check-message.error {
+    color: red;
   }
