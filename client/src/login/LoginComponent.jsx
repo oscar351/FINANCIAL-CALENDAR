@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; // useEffect 추가
 import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import '../css/login.css';
 import { login } from "../apis/api/userManage"
 import KakaoLogin from "./kakaoLogin";
@@ -26,6 +27,15 @@ function LoginComponent() {
     await login(values.email, values.password)
         // .then(LoginData)
         .then((res) => {
+          console.log(res);
+          if(res.code === 200){
+            sessionStorage.setItem("accessToken", res.value.accessToken);
+            sessionStorage.setItem("refreshToken", res.value.refreshToken);
+            window.location.href="/";
+          }else{
+            alert("code " + res.code + " : " + res.message);
+          }
+          // sessionStorage.setItem("isAuthorized", true)
           console.log(res);
           if(res.code === 200){
             sessionStorage.setItem("accessToken", res.value.accessToken);
@@ -88,6 +98,7 @@ function LoginComponent() {
         <span className="slider"></span>
       </label>
       <Routes>
+        <Route path="/findUserInfo" element={<UserInfo />} />
         <Route path="/findUserInfo" element={<UserInfo />} />
       </Routes>
     </div>

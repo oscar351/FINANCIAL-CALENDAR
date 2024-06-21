@@ -8,13 +8,16 @@ import Register from "../login/Register"
 function MainComponent() {   
     const [searchParams, setSearchParams] = useSearchParams();
     
+    
     if(searchParams.get("accessToken")){
       sessionStorage.setItem("accessToken", searchParams.get("accessToken"))
       sessionStorage.setItem("refreshToken", searchParams.get("refreshToken"))
       window.location.href="/"
+      window.location.href="/"
     }
 
     let accessToken = sessionStorage.getItem("accessToken");
+    
     
   return (
     <div className="MainComponent">
