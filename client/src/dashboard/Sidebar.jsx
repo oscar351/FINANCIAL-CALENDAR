@@ -37,8 +37,8 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
       iconType: FaCalendarAlt,
       path: 'calendar',
       subItems: [
-        { name: '월별', path: 'calendarMonth' },
-        { name: '주별', path: 'calendarWeek' },
+        { name: '일정', path: 'calendarMonth' },
+        { name: '', path: 'calendarWeek' },
         { name: '일별', path: 'calendarDay' },
       ],
     },
