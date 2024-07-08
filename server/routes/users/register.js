@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const checkEmail = async(req, res) => {
     const { email } = req.query;
-
+    console.log(email);
     try {
         const user = await client.users.findFirst({
             where: { email, provider : "LOCAL" },
@@ -46,7 +46,13 @@ const register = async (req, res) => {
             username : name,
             password: hashedPassword,
             phoneNumber,
-            provider: 'LOCAL', // 로컬 회원가입
+            provider: 'LOCAL', // 로컬 회원가입,
+            profile : {
+              create : {
+                thumbnailImageUrl: '',
+                profileImageUrl: '',
+              }
+            }
           },
         });
         console.log(user);

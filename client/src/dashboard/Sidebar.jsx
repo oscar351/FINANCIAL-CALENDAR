@@ -32,16 +32,7 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
         { name: '통계', path: 'accountBookStats' },
       ],
     },
-    {
-      name: '캘린더',
-      iconType: FaCalendarAlt,
-      path: 'calendar',
-      subItems: [
-        { name: '일정', path: 'calendarMonth' },
-        { name: '', path: 'calendarWeek' },
-        { name: '일별', path: 'calendarDay' },
-      ],
-    },
+    { name: '캘린더', iconType: FaCalendarAlt, path: 'Calendar' },
     {
       name: '보고서',
       iconType: FaChartBar,
