@@ -9,7 +9,7 @@ import '../css/dashboard.css';
 
 function BoardComponent() {   
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [activePage, setActivePage] = useState('Dashboard');
+  const [activePage, setActivePage] = useState(localStorage.getItem('activePage') == null ? 'Dashboard' : localStorage.getItem('activePage'));
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -37,6 +37,7 @@ function BoardComponent() {
 
   const handlePageChange = (page) => {
     setActivePage(page);
+    localStorage.setItem('activePage', page);
   };
 
   return (

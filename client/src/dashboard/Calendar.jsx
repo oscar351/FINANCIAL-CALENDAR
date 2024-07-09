@@ -4,9 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import koLocale from '@fullcalendar/core/locales/ko'; // 한국어 로케일 추가
+import listPlugin from '@fullcalendar/list';
+import multiMonthPlugin from '@fullcalendar/multimonth';
 import { Modal } from 'antd';
+import '../css/fullcalendarCustom.css';
 
 function Calendar() {
+
   const [events, setEvents] = useState([]);
   const [newEvent, setNewEvent] = useState({ title: '', color: '', category: '' }); // 새로운 이벤트 상태 추가
 
@@ -78,13 +82,13 @@ function Calendar() {
     <div className="calendar">
       <h2>캘린더</h2>
       <FullCalendar
-      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, multiMonthPlugin]}
       initialView="dayGridMonth"
       locale={koLocale}
       headerToolbar={{
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listYear,listMonth,listWeek,listDay,multiMonthYear',
       }}
       eventSources={[
         { events, color: 'blue' }, // 개인 일정
@@ -104,7 +108,11 @@ function Calendar() {
         month: '월',
         week: '주',
         day: '일',
-        list: '목록',
+        listYear: '연간목록',
+        listMonth : '월간목록',
+        listWeek : '주간목록',
+        listDay : '일간목록',
+        multiMonthYear : '년도 전체 보기'
       }} // 버튼 텍스트 한글화
     />
     </div>

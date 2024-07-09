@@ -1,0 +1,11 @@
+.fc .fc-daygrid-day-top{
+    flex-direction : unset;
+}
+
+.fc-day-sat a{
+    color : blue;
+}
+
+.fc-day-sun a{
+    color : red;
+}
