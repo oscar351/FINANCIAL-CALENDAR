@@ -22,16 +22,7 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
 
   const menuItems = [
     { name: 'Dashboard', iconType: FaHome, path: 'Dashboard' },
-    {
-      name: '가계부',
-      iconType: FaMoneyBillWave,
-      path: 'accountBook',
-      subItems: [
-        { name: '입력', path: 'accountBookInput' },
-        { name: '조회', path: 'accountBookView' },
-        { name: '통계', path: 'accountBookStats' },
-      ],
-    },
+    { name: '가계부', iconType: FaMoneyBillWave, path: 'AccountBook'},
     { name: '캘린더', iconType: FaCalendarAlt, path: 'Calendar' },
     {
       name: '보고서',

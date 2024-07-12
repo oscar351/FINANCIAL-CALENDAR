@@ -45,7 +45,7 @@ function BoardComponent() {
       <Sidebar activePage={activePage} onSelectPage={handlePageChange}/>
       <div className="content">
         {/* 검색창과 시간 표시 */}
-        <div className="top-bar">
+        {/* <div className="top-bar">
           <div className="search-bar">
             <input type="text" placeholder="검색" />
             <button>검색</button>
@@ -53,7 +53,7 @@ function BoardComponent() {
           <div className="current-time">
             {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </div>
-        </div>
+        </div> */}
 
         {/* 페이지 컴포넌트 동적 렌더링 */}
         {pageComponents[activePage] && React.createElement(pageComponents[activePage])}
