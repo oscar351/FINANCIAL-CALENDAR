@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate 추가
-import { FaHome, FaMoneyBillWave, FaCalendarAlt, FaChartBar, FaSignOutAlt, FaChevronDown, FaPiggyBank, FaBullseye, FaShareAlt, FaQuestionCircle, FaBell } from 'react-icons/fa';
-import profileImage from '../assets/images/profile.png';
+import { FaHome, FaMoneyBillWave, FaCalendarAlt, FaChartBar, FaSignOutAlt, FaChevronDown, FaPiggyBank, FaBullseye, FaShareAlt, FaQuestionCircle, FaBell, FaCog } from 'react-icons/fa';
+import profileImage from '../assets/images/gwakcheol.png';
 
 function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
   const navigate = useNavigate(); // useNavigate 추가
@@ -37,7 +37,7 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
     { name: '예산 관리', iconType: FaPiggyBank, path: 'budget' },
     { name: '목표 설정', iconType: FaBullseye, path: 'goals' },
     { name: '자산 관리', iconType: FaChartBar, path: 'assets' },
-    { name: '알림', iconType: FaBell, path: 'notification' },
+    { name: '설정', iconType: FaCog, path: 'settings' },
     { name: '공유', iconType: FaShareAlt, path: 'share' },
     { name: '도움말', iconType: FaQuestionCircle, path: 'help' },
   ];
@@ -47,7 +47,7 @@ function Sidebar({ activePage, onSelectPage }) { // activePage prop 추가
       {/* 프로필 */}
       <div className={activePage === 'MyPage' ? 'profile active' : 'profile'} onClick={() => onSelectPage('MyPage')}>
         <img src={profileImage} alt="프로필 사진" className="profile-image" />
-        <span className="nickname">닉네임</span>
+        <span className="nickname">곽철이</span>
       </div>
       {/* 메뉴 */}
       <div className="menu-section">

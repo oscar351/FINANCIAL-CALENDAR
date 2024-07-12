@@ -7,6 +7,7 @@
   .summary-section {
     display: flex;
     gap: 20px;
+    margin-bottom: 20px;
   }
   
   .summary-card {
@@ -18,10 +19,21 @@
     flex: 1;
   }
   
-  .chart-section {
-    grid-column: span 2; /* 차트는 두 열을 모두 차지 */
-  }
-  
   .detail-section {
     grid-column: span 2; /* 상세 내역도 두 열을 모두 차지 */
+  }
+
+  .accountbook-stats-container { /* 새로운 컨테이너 스타일 추가 */
+    display: flex; /* flexbox 사용 */
+    gap: 20px; /* 차트 간 간격 */
+  }
+  
+  .chart-container { /* 각 차트 컨테이너 스타일 */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+    height: 400px;
   }

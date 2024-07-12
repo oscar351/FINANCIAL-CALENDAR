@@ -46,7 +46,7 @@ app.use(session({
   secret: process.env.COOKIE_SECRET_KEY,
   resave: false,
   saveUninitialized: false,
-  store : new MemoryStore({checkPeriod: 60*1000})
+  store: new MemoryStore({ checkPeriod: 60 * 1000 })
   // cookie: {
   //   httpOnly: true,
   //   secure: false,
@@ -68,16 +68,16 @@ passport.deserializeUser(async (token, done) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   console.log("test");
   const userId = decoded.userId;
-  
+
   const user = await client.users.findFirst({
-     where:{
-       email : userId
-     }
+    where: {
+      email: userId
+    }
   })
   if (user) {
-      done(null, token);
-  }else{
-      done(err);
+    done(null, token);
+  } else {
+    done(err);
   }
 
   // Users.findByPk(userId)
@@ -99,12 +99,12 @@ app.set('view engine', 'ejs');
 app.use('/', router);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
