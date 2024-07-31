@@ -53,7 +53,7 @@
     grid-column: span 2; /* 두 열 모두 차지 */
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .tab-bar button {

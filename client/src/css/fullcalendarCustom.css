@@ -1,51 +1,175 @@
-.fc .fc-daygrid-day-top{
-    flex-direction : unset;
+.fc .fc-daygrid-day-top {
+  flex-direction: unset;
 }
 
-.fc-day-sat a{
-    color : blue;
+.fc-day-sat a {
+  color: blue;
 }
 
-.fc-day-sun a{
-    color : red;
+.fc-day-sun a {
+  color: red;
 }
 
 .calendar {
-    position: relative; /* 버튼을 절대 위치로 배치하기 위한 설정 */
-  }
-  
+  position: relative;
+  /* 버튼을 절대 위치로 배치하기 위한 설정 */
+}
+
+.add-event-button {
+  position: absolute;
+  bottom: 20px;
+  right: 200px;
+  width: 50px;
+  /* 동그라미 버튼 크기 */
+  height: 50px;
+  border-radius: 50%;
+  /* 둥근 모양 */
+  background-color: #03aa4e;
+  color: white;
+  border: none;
+  display: flex;
+  /* Flexbox 사용 */
+  justify-content: center;
+  /* 가로 가운데 정렬 */
+  align-items: center;
+  /* 세로 가운데 정렬 */
+  font-size: 24px;
+  /* + 기호 크기 */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* 그림자 추가 */
+  transition: background-color 0.3s, transform 0.3s;
+  /* 호버 효과 */
+  z-index: 999;
+}
+
+.add-event-button:hover {
+  background-color: #03c75a;
+  transform: scale(1.3);
+  /* 호버 시 크기 확대 */
+}
+
+.group-area{
+  display: flex;
+}
+
+.group-area.column{
+  flex-direction: column;
+}
+
+.group-area.rows{
+  flex-direction: row;
+}
+.custom-modal .ant-modal-content {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-modal .ant-modal-header {
+  background-color: #ffffff;
+  border-bottom: none;
+  padding: 16px;
+}
+
+.custom-modal .ant-modal-title {
+  font-size: 18px;
+}
+
+.css-mbl85r-UnderLinedTextArea__Box {
+  display: block;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: none;
+  resize: none;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+  z-index: 0;
+  font-size: 36px;
+  color: rgb(18, 20, 22);
+  font-weight: bold;
+}
+
+.colorPickerBtn {
+  position: relative;
+  font: 400 12px/16px var(--fontFamily__global);
+  color: rgb(255, 255, 255);
+  border-radius: 44px;
+  width: auto;
+  padding: 4px 24px 4px 12px;
+  text-align: center;
+  user-select: none;
+  margin-right: 8px;
+  cursor: pointer;
+  background: rgb(63, 169, 245) !important;
+}
+
+.colorPickerBtn::after {
+  display: block;
+  content: "";
+  clear: both;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 14px;
+  right: 6px;
+  border-width: 4px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(255, 255, 255);
+  transform: rotate(90deg);
+}
+
+.categoryPickerBtn {
+  position: relative;
+  font: 400 12px/16px var(--fontFamily__global);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 44px;
+  width: auto;
+  padding: 4px 24px 4px 12px;
+  text-align: center;
+  user-select: none;
+  margin-right: 8px;
+  cursor: pointer;
+  background: rgb(255, 255, 255) !important;
+}
+
+.categoryPickerBtn::after {
+  display: block;
+  content: "";
+  clear: both;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 14px;
+  right: 6px;
+  border-width: 4px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(0, 0, 0);
+  transform: rotate(90deg);
+}
+
+.datePickerContainer {
+  display: flex;
+  font-size: 16px;
+  padding: 10px 6px;
+  font-weight:bold;
+}
+
+
+
+/* 반응형 디자인 (필요에 따라 추가) */
+@media (max-width: 768px) {
   .add-event-button {
-    position: absolute;
-    bottom: 20px;
-    right: 200px;
-    width: 50px; /* 동그라미 버튼 크기 */
-    height: 50px;
-    border-radius: 50%; /* 둥근 모양 */
-    background-color: #03aa4e;
-    color: white;
-    border: none;
-    display: flex; /* Flexbox 사용 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
-    font-size: 24px; /* + 기호 크기 */
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
-    transition: background-color 0.3s, transform 0.3s; /* 호버 효과 */
-    z-index: 999;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    /* 모바일에서 버튼 크기 조절 */
+    height: 40px;
+    font-size: 20px;
   }
-  
-  .add-event-button:hover {
-    background-color: #03c75a;
-    transform: scale(1.3); /* 호버 시 크기 확대 */
-  }
-  
-  /* 반응형 디자인 (필요에 따라 추가) */
-  @media (max-width: 768px) {
-    .add-event-button {
-      bottom: 10px;
-      right: 10px;
-      width: 40px; /* 모바일에서 버튼 크기 조절 */
-      height: 40px;
-      font-size: 20px;
-    }
-  }
+}

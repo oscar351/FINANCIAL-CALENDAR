@@ -141,7 +141,7 @@ function AccountBookStats() {
                                     <span className="date">{transaction.date} </span>
                                     <span className="category">{transaction.category} </span>
                                     {/* amount가 undefined일 경우 0으로 처리 */}
-                                    <span className="amount">수입 : {(transaction.수입 || 0).toLocaleString()}원 </span>
+                                    <span className="amount">수입 : {(transaction.수입 || 0).toLocaleString()}원 ㅇ</span>
                                     <span className="amount">지출 : {(transaction.지출 || 0).toLocaleString()}원</span>
                                     {/* ... (메모 등 추가 정보) ... */}
                                 </div>

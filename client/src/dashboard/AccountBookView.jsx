@@ -74,7 +74,6 @@ function AccountBookView() {
 
     return (
         <div className="calendar">
-            <h2>캘린더</h2>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, multiMonthPlugin]}
                 initialView={currentView}
