@@ -1,0 +1,75 @@
+.custom-time-picker {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    /* 배경색 흰색 */
+    border-radius: 4px;
+    /* 둥근 모서리 */
+}
+
+.time-picker-group {
+    position: relative;
+    margin-right: 3px;
+    /* 선택 박스 간 간격 */
+}
+
+.time-picker-display {
+    cursor: pointer;
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+}
+
+.time-picker-dropdown {
+    width: 50px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    /* 배경색 흰색 */
+    border: 1px solid #ccc;
+    /* 얇은 회색 테두리 */
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.time-picker-item {
+    padding: 5px;
+    cursor: pointer;
+    color: black;
+    text-align: center;
+    /* 텍스트 색상 검정 */
+}
+
+.time-picker-item.selected {
+    background-color: #f0f0f0;
+    /* 선택된 항목 배경색 */
+}
+
+.time-picker-dropdown::-webkit-scrollbar {
+    width: 6px;
+    /* 스크롤바 너비 0으로 설정하여 숨김 */
+}
+
+/* 호버 시 스크롤바 표시 */
+.time-picker-dropdown:hover::-webkit-scrollbar {
+    width: 6px;
+    /* 호버 시 스크롤바 너비 설정 */
+}
+
+/* 스크롤바 트랙 스타일 */
+.time-picker-dropdown::-webkit-scrollbar-track {
+    background-color: white;
+    /* 트랙 배경색 밝은 회색 */
+    border-radius: 3px;
+    /* 둥근 모서리 */
+}
+
+/* 스크롤바 썸 스타일 */
+.time-picker-dropdown::-webkit-scrollbar-thumb {
+    background-color: #f0f0f0;
+    /* 썸 배경색 흰색 */
+    border-radius: 3px;
+    /* 둥근 모서리 */
+}

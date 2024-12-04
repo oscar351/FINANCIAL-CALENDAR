@@ -4,11 +4,14 @@ import Calendar from '../dashboard/Calendar';
 import AccountBook from '../dashboard/AccountBook';
 import MyPage from '../dashboard/MyPage';
 import Dashboard from '../dashboard/DashboardPage';
+import AdminPage from '../dashboard/AdminPage';
+import Budget from '../dashboard/budget';
+import Goals from '../dashboard/Goals';
+import Assets from '../dashboard/Assets';
 import '../css/dashboard.css';
 
 
 function BoardComponent() {   
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [activePage, setActivePage] = useState(localStorage.getItem('activePage') == null ? 'Dashboard' : localStorage.getItem('activePage'));
   const [darkMode, setDarkMode] = useState(false);
 
@@ -28,12 +31,11 @@ function BoardComponent() {
     Calendar,
     AccountBook,
     MyPage,
+    AdminPage,
+    Budget,
+    Goals,
+    Assets
   };
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const handlePageChange = (page) => {
     setActivePage(page);
@@ -49,9 +51,6 @@ function BoardComponent() {
           <div className="search-bar">
             <input type="text" placeholder="검색" />
             <button>검색</button>
-          </div>
-          <div className="current-time">
-            {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </div>
         </div> */}
 

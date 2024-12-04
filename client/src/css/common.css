@@ -1,30 +1,39 @@
   /* 입력 필드 스타일 개선 */
   .input-group input {
     width: 100%;
-    padding: 12px; /* 패딩 증가 */
+    padding: 12px;
+    /* 패딩 증가 */
     border: 1px solid #ccc;
-    border-radius: 8px; /* 둥근 모서리 증가 */
+    border-radius: 8px;
+    /* 둥근 모서리 증가 */
     box-sizing: border-box;
-    font-size: 1rem; /* 폰트 크기 조정 */
+    font-size: 1rem;
+    /* 폰트 크기 조정 */
   }
 
 
   .button {
-    background-color: #03c75a; /* 진한 핑크 */
+    background-color: #03c75a;
+    /* 진한 핑크 */
     color: white;
-    padding: 12px 20px; /* 패딩 증가 */
+    padding: 12px 20px;
+    /* 패딩 증가 */
     border: none;
-    border-radius: 8px; /* 둥근 모서리 증가 */
+    border-radius: 8px;
+    /* 둥근 모서리 증가 */
     cursor: pointer;
     width: 100%;
-    font-size: 1rem; /* 폰트 크기 조정 */
-    transition: background-color 0.3s; /* hover 효과 추가 */
+    font-size: 1rem;
+    /* 폰트 크기 조정 */
+    transition: background-color 0.3s;
+    /* hover 효과 추가 */
   }
 
   .button:hover {
-    background-color: #03aa4e; /* 더 진한 핑크 */
+    background-color: #03aa4e;
+    /* 더 진한 핑크 */
   }
- 
+
   .slider {
     position: absolute;
     cursor: pointer;
@@ -36,7 +45,7 @@
     border-radius: 10px;
     transition: background-color 0.3s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -50,38 +59,43 @@
   }
 
   .tab-bar {
-    grid-column: span 2; /* 두 열 모두 차지 */
+    grid-column: span 2;
+    /* 두 열 모두 차지 */
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
   }
-  
+
   .tab-bar button {
     background-color: transparent;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 1rem;
-    border-bottom: 2px solid transparent; /* 활성화되지 않은 탭 스타일 */
-  }
-  
-  .tab-bar button.active {
-    border-bottom: 2px solid #03C75A; /* 활성화된 탭 스타일 */
-  }
-  
-  .tab-content {
-    display: inline-grid;
-    grid-column: span 2; /* 두 열 모두 차지 */
-    gap: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    .dashboard {
-      flex-direction: column; /* 모바일에서는 세로 배치 */
-    }
-  
-    .sidebar {
-      width: 100%; /* 모바일에서는 전체 너비 */
-    }
+    border-bottom: 2px solid transparent;
+    /* 활성화되지 않은 탭 스타일 */
   }
 
+  .tab-bar button.active {
+    border-bottom: 2px solid #03C75A;
+    /* 활성화된 탭 스타일 */
+  }
+
+  .tab-content {
+    display: inline-grid;
+    grid-column: span 2;
+    /* 두 열 모두 차지 */
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard {
+      flex-direction: column;
+      /* 모바일에서는 세로 배치 */
+    }
+
+    .sidebar {
+      width: 100%;
+      /* 모바일에서는 전체 너비 */
+    }
+  }

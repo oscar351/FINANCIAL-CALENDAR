@@ -22,7 +22,7 @@ function LoginComponent() {
         sessionStorage.setItem("refreshToken", res.value.refreshToken);
         window.location.href = "/"; // 성공 시 메인 페이지로 이동
       } else {
-        alert(`code ${res.code}: ${res.message}`);
+        alert(`${res.message}`);
       }
     } catch (error) {
       console.error(error);

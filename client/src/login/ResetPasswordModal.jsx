@@ -22,7 +22,7 @@ function ResetPasswordModal({ isOpen, onRequestClose, passwordData, errMsg }) {
     const formData = {
       newPassword,
       confirmPassword,
-      username: passwordData.username,
+      username: passwordData.name,
       email: passwordData.email,
       provider: passwordData.provider,
     };
@@ -46,7 +46,7 @@ function ResetPasswordModal({ isOpen, onRequestClose, passwordData, errMsg }) {
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} className="modal">
       <div className="modal-content">
         <h2>비밀번호 재설정</h2>
-        {passwordData.username ? ( // foundId가 있으면 아이디 표시, 없으면 메시지 표시
+        {passwordData.name ? ( // foundId가 있으면 아이디 표시, 없으면 메시지 표시
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label htmlFor="newPassword">새 비밀번호</label>

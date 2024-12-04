@@ -49,17 +49,24 @@
   /* 호버 시 크기 확대 */
 }
 
-.group-area{
+.seperator{
+  background-color: rgb(239, 239, 239);
+  height: 1px;
+  margin: 12px 0px;
+}
+
+.group-area {
   display: flex;
 }
 
-.group-area.column{
+.group-area.column {
   flex-direction: column;
 }
 
-.group-area.rows{
+.group-area.rows {
   flex-direction: row;
 }
+
 .custom-modal .ant-modal-content {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -157,10 +164,110 @@
   display: flex;
   font-size: 16px;
   padding: 10px 6px;
-  font-weight:bold;
+  font-weight: bold;
+  gap: 5px;
 }
 
+.datePickerContainer .react-calendar {
+  position: absolute;
+  /* 또는 relative */
+  z-index: 1;
+  /* 다른 요소 위에 표시 */
+}
 
+.date-picker-wrapper {
+  position: relative;
+  /* react-calendar를 absolute로 배치하기 위한 부모 요소 */
+}
+
+.react-calendar {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  font-family: 'Pretendard', sans-serif;
+  width: 350px !important;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.react-calendar__navigation__label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.react-calenda r__navigation__prev-button,
+.react-calendar__navigation__next-butto n {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 요일 스타일 */
+.react-calendar__month-view__weekdays {
+  color: #737373;
+  padding: 0px 10px 0px 10px;
+}
+
+.react-calendar__month-view__days {
+  padding: 10px;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 10px 0;
+}
+
+/* 날짜 셀 스타일 */
+.react-calendar__month-view__days__day {
+  border: none;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #202020;
+}
+
+/* 오늘 날짜 스타일 */
+.react-calendar__tile--now {
+  background-color: #f0f0f0 !important;
+  color: #202020;
+  border-radius: 50%;
+}
+
+.blue-text {
+  color: blue !important;
+}
+
+/* 선택된 날짜 스타일 */
+.react-calendar__tile--active {
+  background-color: #279df4 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.datePickerStart,
+.datePickerEnd {
+  cursor: pointer;
+}
+
+.datePickerBtn label{
+  font-weight: bold;
+}
+
+.datePickerBtn input{
+  width: 18px;
+  height: 18px;
+  border: #3788d8;
+}
 
 /* 반응형 디자인 (필요에 따라 추가) */
 @media (max-width: 768px) {

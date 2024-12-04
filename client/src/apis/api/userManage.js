@@ -73,3 +73,12 @@ export const registerUser = async(formdata) => {
         console.log(error);
     }
 }
+
+export const getMyInfo = async(formdata) => {
+    try{
+        const { data } = await authInstance.get(`users/getMyInfo`, formdata);
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}

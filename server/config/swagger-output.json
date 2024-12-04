@@ -167,6 +167,29 @@
         }
       }
     },
+    "/users/getmyInfo": {
+      "get": {
+        "tags": [
+          "User API"
+        ],
+        "summary": "아이디 찾기 API",
+        "description": "아이디 찾기",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "tags": [
@@ -305,6 +328,25 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/system/performance": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

@@ -1,6 +1,5 @@
 const client = require('../../client');
 const jwt = require('../../utils/jwt-util');
-const { redisClient } = require('../../utils/redis');
 const bcrypt = require('bcrypt');
 
 const login = async (req, res, next) => {
@@ -24,8 +23,16 @@ const login = async (req, res, next) => {
       if(compare){
         const accessToken = jwt.sign(user);
         const refreshToken = jwt.refresh();
-  
-        await redisClient.set(user.email, refreshToken);
+        
+        await client.users.update({
+          where : { 
+            id : user.id
+          },
+          data : {
+            refreshToken : refreshToken,
+            accessToken : accessToken,
+          }
+        });
   
         res.json({
           code:200,

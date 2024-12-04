@@ -27,26 +27,6 @@ enum NotificationType {
   BUDGET_WARNING
 }
 
-model Users {
-  id                       Int                 @id @default(autoincrement())
-  username                 String              @db.VarChar(255)
-  email                    String              @db.VarChar(255)
-  phoneNumber              String?             @db.VarChar(20)
-  password                 String?             @db.VarChar(255)
-  provider                 String              @db.VarChar(10)
-  role                     Role                @default(USER)
-  profile                  Profile?
-  calendars                Calendar[]
-  categories               CalendarCategory[]
-  financials               Financial[]
-  sharedCalendars          SharedCalendar[]
-  notifications            Notification[]
-  budgets                  Budget[]
-  ownedFinancialCategories FinancialCategory[]
-
-  @@unique([username, email, provider], name: "createProvider")
-}
-
 model Profile {
   id                Int     @id @default(autoincrement())
   user              Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -55,17 +35,6 @@ model Profile {
   profileImageUrl   String? @db.Text
 }
 
-model Calendar {
-  id              Int                @id @default(autoincrement())
-  title           String
-  description     String
-  user            Users              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          Int
-  startDate       DateTime
-  endDate         DateTime
-  categories      CalendarCategory[]
-  sharedCalendars SharedCalendar[]
-}
 
 model CalendarCategory {
   id       Int        @id @default(autoincrement())
@@ -87,6 +56,27 @@ model SharedCalendar {
 
   @@unique([calendarId, userId]) // calendarId와 userId 조합으로 유니크 제약 조건 추가
 }
+
+model Calendar {
+  id              Int                @id @default(autoincrement())
+  title           String
+  description     String
+  user            Users              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          Int
+  startDate       DateTime
+  endDate         DateTime
+  categories      CalendarCategory[]
+  sharedCalendars SharedCalendar[]
+}
+
+model Attachment {
+  id          Int       @id @default(autoincrement())
+  financial   Financial @relation(fields: [financialId], references: [id])
+  financialId Int
+  filename    String
+  url         String
+}
+
 
 model Financial {
   id          Int                @id @default(autoincrement())
@@ -132,10 +122,24 @@ model FinancialCategory {
   Budget    Budget[]
 }
 
-model Attachment {
-  id          Int       @id @default(autoincrement())
-  financial   Financial @relation(fields: [financialId], references: [id])
-  financialId Int
-  filename    String
-  url         String
+model Users {
+  id                       Int                 @id @default(autoincrement())
+  username                 String              @db.VarChar(255)
+  email                    String              @db.VarChar(255)
+  phoneNumber              String?             @db.VarChar(20)
+  password                 String?             @db.VarChar(255)
+  provider                 String              @db.VarChar(10)
+  role                     Role                @default(USER)
+  accessToken              String?             @db.VarChar(255)
+  refreshToken             String?             @db.VarChar(255)
+  profile                  Profile?
+  calendars                Calendar[]
+  categories               CalendarCategory[]
+  financials               Financial[]
+  sharedCalendars          SharedCalendar[]
+  notifications            Notification[]
+  budgets                  Budget[]
+  ownedFinancialCategories FinancialCategory[]
+
+  @@unique([username, email, provider], name: "createProvider")
 }

@@ -36,7 +36,11 @@ app.use(cors(corsOptions));
 //Swagger 적용
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile, { explorer: true }));
 
-app.use(logger('dev'));
+const skipLogging = (req, res) => {
+  return req.path === '/system/performance' || res.statusCode === 304;
+}
+
+app.use(logger('dev', { skip : skipLogging }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -7,7 +7,7 @@ import { findUserId, resetUserPassword } from "../apis/api/userManage"
 function FindAccount() {
   const [activeTab, setActiveTab] = useState('findId');
   const [formData, setFormData] = useState({ name: '', phoneNumber: '', userId: '' });
-  const [passwordData, setPasswordData] = useState({ username: null, email: null, provider: null });
+  const [passwordData, setPasswordData] = useState({ name: null, email: null, provider: null });
   const [showFindIdModal, setShowFindIdModal] = useState(false);
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
   const [foundId, setFoundId] = useState(null);
@@ -65,7 +65,7 @@ function FindAccount() {
     try {
       const res = await resetUserPassword(formData);
       if (res.code === 200) {
-        setPasswordData({ username: res.value.username, email: res.value.email, provider: res.value.provider });
+        setPasswordData({ name: res.value.username, email: res.value.email, provider: res.value.provider });
       } else {
         setErrMsg(res.message);
       }
